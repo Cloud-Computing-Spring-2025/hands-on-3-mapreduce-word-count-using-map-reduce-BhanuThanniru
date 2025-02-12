@@ -1,17 +1,19 @@
 
 # WordCount-Using-MapReduce-Hadoop
 
-This repository is designed to test MapReduce jobs using a simple word count dataset.
+## Project Overview
+This project implements a Word Count program using Hadoop MapReduce in Java. The application processes a text dataset, counts the number of occurrences of each word, and outputs the results. It is built using Maven and designed to run on a Hadoop cluster.
 
-## Objectives
+## Approach and Implementation
+- **Mapper (WordMapper.java):**
+  - Reads each line from the input file.
+  - Tokenizes the line into words.
+  - Emits `(word, 1)` pairs for each valid word.
 
-By completing this activity, students will:
-
-1. **Understand Hadoop's Architecture:** Learn how Hadoop's distributed file system (HDFS) and MapReduce framework work together to process large datasets.
-2. **Build and Deploy a MapReduce Job:** Gain experience in compiling a Java MapReduce program, deploying it to a Hadoop cluster, and running it using Docker.
-3. **Interact with Hadoop Ecosystem:** Practice using Hadoop commands to manage HDFS and execute MapReduce jobs.
-4. **Work with Docker Containers:** Understand how to use Docker to run and manage Hadoop components and transfer files between the host and container environments.
-5. **Analyze MapReduce Job Outputs:** Learn how to retrieve and interpret the results of a MapReduce job.
+- **Reducer (WordReducer.java):**
+  - Receives words from mappers grouped by key.
+  - Aggregates occurrences by summing up the values.
+  - Outputs `(word, count)` pairs.
 
 ## Setup and Execution
 
@@ -115,4 +117,22 @@ To copy the output from HDFS to your local machine:
     ```bash
     docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output/ shared-folder/output/
     ```
-3. Commit and push to your repo so that we can able to see your output
+## Challenges faced
+    While executing the code, though the code is correct, the output is not being generated. It is being stopped at map 17% reduce 0% and a pop up is shown that the resources are utilized exceeding the limit.
+
+## Sample Input
+    Hello world
+    Hello Hadoop
+    Hadoop is powerful
+    Hadoop is used for big data
+
+## Sample Output
+    Hadoop 3
+    Hello 2
+    is 2
+    used 1
+    for 1
+    big 1
+    data 1
+    powerful 1
+    world 1
